@@ -24,7 +24,7 @@ viaje(X,Y):- vuelo(X, Y).
 viaje(X,Y):- conexion_por_escala(X, Y).
 
 
-%mascotas
+% mascotas
 
 perro(firulais).
 perro(bruno).
@@ -48,15 +48,16 @@ dueno_perro(X):- dueno(X, Y), perro(Y).
 
 dueno_gato(X):- dueno(X, Y), gato(Y).
 
-dueno_ave(X):- dueno(X, Y), ave(Y). %regla para tipo_mascota
+dueno_ave(X):- dueno(X, Y), ave(Y). % regla para tipo_mascota
 
-dueno_multiple(X):- dueno(X, Y), dueno(X, Z), gato(Y), gato(Z).
-dueno_multiple(X):- dueno(X, Y), dueno(X, Z), perro(Y), perro(Z).
+dueno_multiple(X):- dueno(X, Y), dueno(X, Z), gato(Y), gato(Z), Y \= Z.
+dueno_multiple(X):- dueno(X, Y), dueno(X, Z), perro(Y), perro(Z), Y \= Z.
 
 amante_animales(X):- dueno_perro(X), dueno_gato(X).
 
-mascota_compartida(X, Y):- dueno(X, Z), dueno(Y, Z).
+mascota_compartida(X, Y):- dueno(X, Z), dueno(Y, Z) X \= Y.
 
 tipo_mascota(X, perro):- dueno_perro(X).
 tipo_mascota(X, gato):- dueno_gato(X).
 tipo_mascota(X, ave):- dueno_ave(X).
+
